@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Vivarium</title>
+
+		<link rel="stylesheet" href="index.css" type="text/css" media="all">
+
+		<script type="text/javascript" src="src/model/Set.js"></script>
+
+		<script type="text/javascript" src="src/model/Location.js"></script>
+		<script type="text/javascript" src="src/model/Area.js"></script>
+
+		<script type="text/javascript" src="src/model/Entity.js"></script>
+		<script type="text/javascript" src="src/model/Resource.js"></script>
+
+		<script type="text/javascript" src="src/model/Origin.js"></script>
+		<script type="text/javascript" src="src/model/OriginSet.js"></script>
+
+		<script type="text/javascript" src="src/model/Forest.js"></script>
+		<script type="text/javascript" src="src/model/ForestSet.js"></script>
+
+		<script type="text/javascript" src="src/model/Junction.js"></script>
+		<script type="text/javascript" src="src/model/JunctionSet.js"></script>
+
+		<script type="text/javascript" src="src/model/Totem.js"></script>
+		<script type="text/javascript" src="src/model/TotemSet.js"></script>
+
+		<script type="text/javascript" src="src/model/World.js"></script>
+
+		<script type="text/javascript" src="src/view/Layer.js"></script>
+		<script type="text/javascript" src="src/view/ResourceLayer.js"></script>
+		<script type="text/javascript" src="src/view/Entities.js"></script>
+		<script type="text/javascript" src="src/view/Grid.js"></script>
+		<script type="text/javascript" src="src/view/Mask.js"></script>
+		<script type="text/javascript" src="src/view/MainLayer.js"></script>
+
+		<script type="text/javascript">
+			(function () {
+
+				
+
+				function main () {
+
+					var world = new model.World(function () {
+						console.debug('world change !!');
+
+
+					});
+
+					world.origins.set('origins#0', {
+						label: 'Origin 0',
+						location: [0, 0]
+					});
+
+					world.totems.set('totem#0', {
+						label: 'Totem 0',
+						location: [0, 10]
+					});
+
+					world.junctions.set('juntions#0', {
+						label: 'Junction 0',
+						location: [4, 4]
+					});
+
+					world.totems.set('totem#1', {
+						label: 'Totem 0',
+						location: [10, 10]
+					});
+
+					world.forests.set('forest#1', {
+						label: 'Forêt',
+						area: [-6, -6, -6, -5, -5, -6, -5, -5, -4, -5, -4, -4, -3, -4]
+					});
+
+
+
+					// var origin = new model.Origin();
+
+					// world.add(origin, 0, 0);
+
+
+					var layer = new view.MainLayer(world);
+
+					
+					layer.initialize(500, 500);
+					layer.render();
+					layer.appendTo(document.body);
+
+				}
+
+				window.addEventListener('load', function (event) { 
+					document.body.style = 'padding: 0; margin: 0; overflow: hidden; position: absolute; left: 0; top: 0;';
+					main();
+				});
+			})();
+		</script>
+	</head>
+	<body></body>
+</html>
