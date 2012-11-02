@@ -3,11 +3,16 @@ window.model.Resource = (function () {
 
 var Area = window.model.Area;
 var Location = window.model.Location;
+var Entity = window.model.Entity;
 
-var Resource = function () {
-};
+
+var Resource = function () {};
+
+Resource.prototype = Object.create(new Entity());
 
 Resource.prototype.setOptions = function (options) {
+	Entity.prototype.setOptions.apply(this, arguments);
+
 	if (!options.hasOwnProperty('area')) {
 		throw new Error('Missing option `area`.');
 	}
@@ -21,14 +26,6 @@ Resource.prototype.setOptions = function (options) {
 
 	Object.defineProperty(this, 'area', {
 		value: new Area(locations)
-	});
-
-
-	if (!options.hasOwnProperty('label')) {
-		throw new Error('Missing option `label`.');
-	}
-	Object.defineProperty(this, 'label', {
-		value: options.label
 	});
 };
 

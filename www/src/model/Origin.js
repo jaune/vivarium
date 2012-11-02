@@ -1,13 +1,11 @@
 window.model = window.model || {};
 window.model.Origin = (function () {
 
-var Entity = window.model.Entity;
+var Placable = window.model.Placable;
 
-var Origin = function (name) {
-	this.name_ = name;
-};
+var Origin = function () {};
 
-Origin.prototype = Object.create(new Entity());
+Origin.prototype = Object.create(new Placable());
 
 return Origin;
 

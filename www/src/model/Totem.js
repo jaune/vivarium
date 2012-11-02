@@ -1,13 +1,11 @@
 window.model = window.model || {};
 window.model.Totem = (function () {
 
-var Entity = window.model.Entity;
+var Placable = window.model.Placable;
 
-var Totem = function (name) {
-	this.name_ = name;
-};
+var Totem = function () {};
 
-Totem.prototype = Object.create(new Entity());
+Totem.prototype = Object.create(new Placable());
 
 return Totem;
 

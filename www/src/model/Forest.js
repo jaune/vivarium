@@ -3,9 +3,7 @@ window.model.Forest = (function () {
 
 var Resource = window.model.Resource;
 
-var Forest = function (name) {
-	this.name_ = name;
-};
+var Forest = function () {};
 
 Forest.prototype = Object.create(new Resource());
 

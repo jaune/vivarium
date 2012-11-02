@@ -1,21 +1,16 @@
 window.model = window.model || {};
 window.model.OriginSet = (function () {
 
-var Set = window.model.Set;
+var EntitySet = window.model.EntitySet;
 var Origin = window.model.Origin;
 
 var OriginSet = function () {
 };
 
-OriginSet.prototype = Object.create(new Set());
+OriginSet.prototype = Object.create(new EntitySet());
 
-OriginSet.prototype.set = function (name, options) {
-	var origin = new Origin(name);
-
-	origin.setOptions(options);
-
-	Set.prototype.set.call(this, name, origin);
-	return this;
+OriginSet.prototype.instantiate = function () {
+	return new Origin();
 };
 
 return OriginSet;

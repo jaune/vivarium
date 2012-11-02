@@ -23,12 +23,12 @@ Grid.prototype.render = function () {
 
 	var x = 0;
 						
-	for (x = 0; x <= bw; x += 20) {
+	for (x = 10; x <= bw; x += 20) {
 		ctx.moveTo(0.5 + x, 0);
 		ctx.lineTo(0.5 + x, bh);
 	}
 
-	for (x = 0; x <= bh; x += 20) {
+	for (x = 10; x <= bh; x += 20) {
 		ctx.moveTo(0, 0.5 + x);
 		ctx.lineTo(bw, 0.5 + x);
 	}
@@ -37,12 +37,12 @@ Grid.prototype.render = function () {
 	ctx.stroke();
 
 
-	for (x = 10; x <= bw; x += 20) {
+	for (x = 0; x <= bw; x += 20) {
 		ctx.moveTo(0.5 + x, 0);
 		ctx.lineTo(0.5 + x, bh);
 	}
 
-	for (x = 10; x <= bh; x += 20) {
+	for (x = 0; x <= bh; x += 20) {
 		ctx.moveTo(0, 0.5 + x);
 		ctx.lineTo(bw, 0.5 + x);
 	}

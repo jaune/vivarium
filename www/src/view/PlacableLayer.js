@@ -1,15 +1,15 @@
 window.view = window.view || {};
-window.view.Entities = (function () {
+window.view.PlacableLayer = (function () {
 
 var Layer = window.view.Layer;
 
-var Entities = function (world) {
+var PlacableLayer = function (world) {
 	this.world_= world;
 };
 
-Entities.prototype = Object.create(new Layer());
+PlacableLayer.prototype = Object.create(new Layer());
 
-Entities.prototype.render = function () {
+PlacableLayer.prototype.render = function () {
 	var ctx = this.context;
 	var w = this.width_;
 	var h = this.heigth_;
@@ -38,7 +38,7 @@ Entities.prototype.render = function () {
 	}, this);
 };
 
-return Entities;
+return PlacableLayer;
 
 })();
 

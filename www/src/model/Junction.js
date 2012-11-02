@@ -1,12 +1,13 @@
 window.model = window.model || {};
 window.model.Junction = (function () {
 
-var Entity = window.model.Entity;
+var Placable = window.model.Placable;
 
 var Junction = function () {
+	Placable.apply(this, arguments);
 };
 
-Junction.prototype = Object.create(new Entity());
+Junction.prototype = Object.create(new Placable());
 
 return Junction;
 

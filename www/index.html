@@ -6,12 +6,17 @@
 		<link rel="stylesheet" href="index.css" type="text/css" media="all">
 
 		<script type="text/javascript" src="src/model/Set.js"></script>
+		<script type="text/javascript" src="src/model/Union.js"></script>
 
 		<script type="text/javascript" src="src/model/Location.js"></script>
 		<script type="text/javascript" src="src/model/Area.js"></script>
 
+
 		<script type="text/javascript" src="src/model/Entity.js"></script>
+		<script type="text/javascript" src="src/model/Placable.js"></script>
 		<script type="text/javascript" src="src/model/Resource.js"></script>
+
+		<script type="text/javascript" src="src/model/EntitySet.js"></script>
 
 		<script type="text/javascript" src="src/model/Origin.js"></script>
 		<script type="text/javascript" src="src/model/OriginSet.js"></script>
@@ -22,6 +27,9 @@
 		<script type="text/javascript" src="src/model/Junction.js"></script>
 		<script type="text/javascript" src="src/model/JunctionSet.js"></script>
 
+		<script type="text/javascript" src="src/model/Road.js"></script>
+		<script type="text/javascript" src="src/model/RoadSet.js"></script>
+
 		<script type="text/javascript" src="src/model/Totem.js"></script>
 		<script type="text/javascript" src="src/model/TotemSet.js"></script>
 
@@ -29,7 +37,8 @@
 
 		<script type="text/javascript" src="src/view/Layer.js"></script>
 		<script type="text/javascript" src="src/view/ResourceLayer.js"></script>
-		<script type="text/javascript" src="src/view/Entities.js"></script>
+		<script type="text/javascript" src="src/view/RoadLayer.js"></script>
+		<script type="text/javascript" src="src/view/PlacableLayer.js"></script>
 		<script type="text/javascript" src="src/view/Grid.js"></script>
 		<script type="text/javascript" src="src/view/Mask.js"></script>
 		<script type="text/javascript" src="src/view/MainLayer.js"></script>
@@ -41,37 +50,66 @@
 
 				function main () {
 
-					var world = new model.World(function () {
-						console.debug('world change !!');
+					var world = new model.World();
 
-
-					});
-
-					world.origins.set('origins#0', {
+					world.origins.set({
+						name: 'origins#0',
 						label: 'Origin 0',
 						location: [0, 0]
 					});
 
-					world.totems.set('totem#0', {
+					world.totems.set({
+						name: 'totem#0',
 						label: 'Totem 0',
 						location: [0, 10]
 					});
 
-					world.junctions.set('juntions#0', {
+					world.junctions.set({
+						name: 'juntions#0',
 						label: 'Junction 0',
 						location: [4, 4]
 					});
+					world.junctions.set({
+						name: 'juntions#1',
+						label: 'Junction 0',
+						location: [4, -4]
+					});
 
-					world.totems.set('totem#1', {
+					world.totems.set({
+						name: 'totem#1',
 						label: 'Totem 0',
 						location: [10, 10]
 					});
 
-					world.forests.set('forest#1', {
+					world.forests.set({
+						name: 'forest#1',
 						label: 'Forêt',
 						area: [-6, -6, -6, -5, -5, -6, -5, -5, -4, -5, -4, -4, -3, -4]
 					});
 
+					world.roads.set({
+						name: 'road#0',
+						label: 'Road 0',
+						ends: ['juntions#0', 'juntions#1']
+					});
+
+					world.roads.set({
+						name: 'road#1',
+						label: 'Road 1',
+						ends: ['juntions#0', 'origins#0']
+					});
+
+					world.roads.set({
+						name: 'road#2',
+						label: 'Road 2',
+						ends: ['juntions#0', 'totem#1']
+					});
+
+					world.roads.set({
+						name: 'road#3',
+						label: 'Road 3',
+						ends: ['juntions#0', 'totem#0']
+					});
 
 
 					// var origin = new model.Origin();
@@ -82,7 +120,7 @@
 					var layer = new view.MainLayer(world);
 
 					
-					layer.initialize(500, 500);
+					layer.initialize(600, 600);
 					layer.render();
 					layer.appendTo(document.body);
 

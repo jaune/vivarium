@@ -4,14 +4,16 @@ window.view.MainLayer = (function () {
 var Layer = window.view.Layer;
 var Grid = window.view.Grid;
 var Mask = window.view.Mask;
-var Entities = window.view.Entities;
+var PlacableLayer = window.view.PlacableLayer;
 var ResourceLayer = window.view.ResourceLayer;
+var RoadLayer = window.view.RoadLayer;
 
 var MainLayer = function (world) {
 	this.grid_ = null;
 	this.mask_ = null;
-	this.entities_ = null;
+	this.placables_ = null;
 	this.resouces_ = null;
+	this.roads_ = null;
 
 	this.world_= world;
 };
@@ -31,10 +33,15 @@ MainLayer.prototype.initialize = function (w, h) {
 	mask.initialize(w, h);
 	mask.render();
 
-	var entities = new Entities(this.world_);
+	var placables = new PlacableLayer(this.world_);
 
-	entities.initialize(w, h);
-	entities.render();
+	placables.initialize(w, h);
+	placables.render();
+
+	var roads = new RoadLayer(this.world_);
+
+	roads.initialize(w, h);
+	roads.render();
 
 	var resouces = new ResourceLayer(this.world_);
 
@@ -44,7 +51,8 @@ MainLayer.prototype.initialize = function (w, h) {
 	this.grid_ = grid;
 	this.mask_ = mask;
 	this.resouces_ = resouces;
-	this.entities_ = entities;
+	this.placables_ = placables;
+	this.roads_ = roads;
 };
 
 MainLayer.prototype.render = function () {
@@ -52,13 +60,16 @@ MainLayer.prototype.render = function () {
 
 	this.grid_.drawIn(ctx, 0, 0);
 
+	this.roads_.drawIn(ctx, 0, 0);
+
 	this.resouces_.drawIn(ctx, 0, 0);
 
-	this.entities_.drawIn(ctx, 0, 0);
+	this.placables_.drawIn(ctx, 0, 0);
 
 	ctx.globalCompositeOperation = 'destination-in';
 
 	this.mask_.drawIn(ctx, 0, 0);
+
 };
 
 return MainLayer;
