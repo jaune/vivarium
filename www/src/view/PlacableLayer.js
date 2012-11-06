@@ -9,13 +9,7 @@ var PlacableLayer = function (world) {
 
 PlacableLayer.prototype = Object.create(new Layer());
 
-PlacableLayer.prototype.render = function () {
-	var ctx = this.context;
-	var w = this.width_;
-	var h = this.heigth_;
-
-	ctx.translate(w/2, h/2);
-
+PlacableLayer.prototype.doRender = function () {
 	this.world_.origins.each(function (item) {
 		this.drawDisk(
 			(10 * item.location.x),

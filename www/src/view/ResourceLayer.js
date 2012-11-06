@@ -9,14 +9,7 @@ var ResourceLayer = function (world) {
 
 ResourceLayer.prototype = Object.create(new Layer());
 
-ResourceLayer.prototype.render = function () {
-	var ctx = this.context;
-
-	var w = this.width_;
-	var h = this.heigth_;
-
-	ctx.translate(w/2, h/2);
-
+ResourceLayer.prototype.doRender = function () {
 	this.world_.forests.each(function (item) {
 		item.area.each(function (location, key) {
 			this.drawDisk(
@@ -25,7 +18,6 @@ ResourceLayer.prototype.render = function () {
 				10, '#74CB67');
 		}, this);
 	}, this);
-
 };
 
 return ResourceLayer;

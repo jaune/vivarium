@@ -9,13 +9,8 @@ var RoadLayer = function (world) {
 
 RoadLayer.prototype = Object.create(new Layer());
 
-RoadLayer.prototype.render = function () {
+RoadLayer.prototype.doRender = function () {
 	var ctx = this.context;
-
-	var w = this.width_;
-	var h = this.heigth_;
-
-	ctx.translate(w/2, h/2);
 
 	ctx.strokeStyle = "orange";
 	ctx.lineWidth = 1.0;
@@ -32,7 +27,6 @@ RoadLayer.prototype.render = function () {
 		}, this);
 		ctx.stroke();
 	}, this);
-
 };
 
 return RoadLayer;

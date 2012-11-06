@@ -3,33 +3,46 @@ window.view.Layer = (function () {
 
 
 var Layer = function () {
-	this.canvas_ = null;
+	var canvas = document.createElement('CANVAS');
+
+	canvas.setAttribute('style', 'position: absolute; top: 0; left: 0; margin: 0; padding: 0;');
+	this.canvas_ = canvas;
+
+	this.width_ = 0;
+	this.height_ = 0;
 };
 
 
 Layer.prototype.initialize = function (w, h) {
-	var canvas = document.createElement('CANVAS');
-	
-	this.canvas_ = canvas;
-	this.width_ = w;
-	this.heigth_ = h;
-
-	this.rezise(w, h);
-
 	Object.defineProperty(this, 'context', {
-		value: canvas.getContext('2d')
+		value: this.canvas_.getContext('2d')
 	});
-
+	this.resize(w, h);
 };
 
-Layer.prototype.rezise = function (w, h) {
-	var canvas = this.canvas_;
+Object.defineProperty(Layer.prototype, 'height', {
+	get: function () {
+		return this.height_;
+	},
+	set: function (value) {
+		this.height_= value;
+		this.canvas_.setAttribute('height', this.height_);
+	}
+});
 
-	this.width_ = w;
-	this.heigth_ = h;
+Object.defineProperty(Layer.prototype, 'width', {
+	get: function () {
+		return this.width_;
+	},
+	set: function (value) {
+		this.width_= value;
+		this.canvas_.setAttribute('width', this.width_);
+	}
+});
 
-	canvas.setAttribute('width', this.width_);
-	canvas.setAttribute('height', this.heigth_);
+Layer.prototype.resize = function (w, h) {
+	this.width = w;
+	this.height = h;
 };
 
 Layer.prototype.appendTo = function (parent) {
@@ -67,7 +80,25 @@ Layer.prototype.drawIn = function () {
 	ctx.drawImage.apply(ctx, args);
 };
 
-Layer.prototype.render = function () {};
+
+Layer.prototype.render = function () {
+	var ctx = this.context;
+	var w = this.width, h = this.height;
+
+	ctx.clearRect(0, 0, w, h);
+	ctx.save();
+
+	ctx.translate(w / 2 , h / 2);
+//	ctx.scale(this.z_, this.z_);
+
+	this.doRender();
+
+	ctx.restore();
+};
+
+Layer.prototype.doRender = function () {
+	throw new Error('Layer.prototype.doRender...');
+};
 
 return Layer;
 

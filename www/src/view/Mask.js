@@ -11,24 +11,18 @@ Mask.prototype = Object.create(new Layer());
 
 
 
-Mask.prototype.render = function () {
-	var w = this.width_;
-	var h = this.heigth_;
-
-	var offset_x =  w/2,
-		offset_y = h/2;
-
+Mask.prototype.doRender = function () {
 	this.world_.origins.each(function (item) {
 		this.drawDisk(
-			(10 * item.location.x) + offset_x,
-			(10 * item.location.y) + offset_y,
+			(10 * item.location.x),
+			(10 * item.location.y),
 			100, '#fff');
 	}, this);
 
 	this.world_.totems.each(function (item) {
 		this.drawDisk(
-			(10 * item.location.x) + offset_x,
-			(10 * item.location.y) + offset_y,
+			(10 * item.location.x),
+			(10 * item.location.y),
 			60, '#fff');
 	}, this);
 };

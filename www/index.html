@@ -3,7 +3,23 @@
 	<head>
 		<title>Vivarium</title>
 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
 		<link rel="stylesheet" href="index.css" type="text/css" media="all">
+
+		<script type="text/javascript">
+			if (!window.requestAnimationFrame) {
+				['ms', 'moz', 'webkit'].forEach(function (prefix) {
+					if (window[prefix+'RequestAnimationFrame']) {
+						window.requestAnimationFrame = window[prefix+'RequestAnimationFrame'];	
+					}
+				});
+			}
+		</script>
+
+		<script type="text/javascript" src="lib/zepto.js"></script>
+		<script type="text/javascript" src="lib/hammer.js"></script>
 
 		<script type="text/javascript" src="src/model/Set.js"></script>
 		<script type="text/javascript" src="src/model/Union.js"></script>
@@ -35,19 +51,22 @@
 
 		<script type="text/javascript" src="src/model/World.js"></script>
 
+		
+
+		<script type="text/javascript" src="src/view/Viewer.js"></script>
 		<script type="text/javascript" src="src/view/Layer.js"></script>
+		<script type="text/javascript" src="src/view/Layers.js"></script>
+		
+
 		<script type="text/javascript" src="src/view/ResourceLayer.js"></script>
 		<script type="text/javascript" src="src/view/RoadLayer.js"></script>
 		<script type="text/javascript" src="src/view/PlacableLayer.js"></script>
 		<script type="text/javascript" src="src/view/Grid.js"></script>
 		<script type="text/javascript" src="src/view/Mask.js"></script>
-		<script type="text/javascript" src="src/view/MainLayer.js"></script>
+		<script type="text/javascript" src="src/view/CompositeLayer.js"></script>
 
 		<script type="text/javascript">
 			(function () {
-
-				
-
 				function main () {
 
 					var world = new model.World();
@@ -116,22 +135,96 @@
 
 					// world.add(origin, 0, 0);
 
-
-					var layer = new view.MainLayer(world);
+					var stack = new view.Viewer();
 
 					
-					layer.initialize(600, 600);
-					layer.render();
-					layer.appendTo(document.body);
+					stack.initialize(window.innerWidth, window.innerHeight, world);
 
+					
+
+//					var new_counter = 42;
+
+
+
+/*
+					h.ontransformstart = function(ev) {
+					};
+					h.ontransform = function(ev) {
+						console.debug(ev);
+					};
+					h.ontransformend = function(ev) {
+					};
+*/
+
+/*
+					$(stack.layers_[0].canvas_).on('click', function (event) {
+						var targetX = event.pageX - event.target.offsetLeft,
+							targetY = event.pageY - event.target.offsetTop;
+						
+						var x = targetX,
+							y = targetY;
+
+						var w = this.width_ / 2,
+							h = this.height_ / 2;
+
+						x = (x - 300) / 10;
+						y = (y - 300) / 10;
+
+						x = Math.round(x);
+						y = Math.round(y);
+
+						var ctx = this.context;
+
+
+//						world.totems.set({
+//							name: 'totem#'+new_counter,
+//							label: 'Totem 0',
+//							location: [x, y]
+//						});
+//						new_counter++;
+
+						layer.render();
+						layer.drawDisk(
+							(x * 10) + 300,
+							(y * 10) + 300,
+							15, 'rgba(0, 0, 200, 0.5)');
+					});
+*/
+					stack.appendTo(document.body);
+
+					var resize_timeout = null;
+					$(window).on('resize', function () {
+						if (resize_timeout) {
+							window.clearTimeout(resize_timeout);
+						}
+						resize_timeout = window.setTimeout(function () {
+							stack.resize(window.innerWidth, window.innerHeight);
+							resize_timeout = null;
+						}, 1000);
+					});
 				}
 
-				window.addEventListener('load', function (event) { 
-					document.body.style = 'padding: 0; margin: 0; overflow: hidden; position: absolute; left: 0; top: 0;';
+
+
+				$(function () {
+					document.body.style = 'padding: 0; margin: 0; overflow: hidden;';
 					main();
 				});
 			})();
 		</script>
 	</head>
-	<body></body>
+	<body>
+<!--
+		<ul class="menu-void">
+			<li><button class="build-totem">Build : Totem</button></li>
+			<li><button class="build-junction">Build : Junction</button></li>
+			<li><button class="close">Close</button></li>
+		</ul>
+		<ul class="menu-junction">
+			<li><button class="build-road">Build : Road</button></li>
+			<li><button class="destroy">Destroy</button></li>
+			<li><button class="close">Close</button></li>
+		</ul>
+-->
+	</body>
 </html>
