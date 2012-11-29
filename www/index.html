@@ -21,6 +21,12 @@
 		<script type="text/javascript" src="lib/zepto.js"></script>
 		<script type="text/javascript" src="lib/hammer.js"></script>
 
+		<script type="text/javascript" src="lib/huus/Query.js"></script>
+		<script type="text/javascript" src="lib/huus/Collection.js"></script>
+		<script type="text/javascript" src="lib/huus/DataBase.js"></script>
+		<script type="text/javascript" src="lib/huus/Cursor.js"></script>
+		
+
 		<script type="text/javascript" src="src/model/Set.js"></script>
 		<script type="text/javascript" src="src/model/Union.js"></script>
 
@@ -33,25 +39,6 @@
 		<script type="text/javascript" src="src/model/Resource.js"></script>
 
 		<script type="text/javascript" src="src/model/EntitySet.js"></script>
-
-		<script type="text/javascript" src="src/model/Origin.js"></script>
-		<script type="text/javascript" src="src/model/OriginSet.js"></script>
-
-		<script type="text/javascript" src="src/model/Forest.js"></script>
-		<script type="text/javascript" src="src/model/ForestSet.js"></script>
-
-		<script type="text/javascript" src="src/model/Junction.js"></script>
-		<script type="text/javascript" src="src/model/JunctionSet.js"></script>
-
-		<script type="text/javascript" src="src/model/Road.js"></script>
-		<script type="text/javascript" src="src/model/RoadSet.js"></script>
-
-		<script type="text/javascript" src="src/model/Totem.js"></script>
-		<script type="text/javascript" src="src/model/TotemSet.js"></script>
-
-		<script type="text/javascript" src="src/model/World.js"></script>
-
-		
 
 		<script type="text/javascript" src="src/view/Viewer.js"></script>
 		<script type="text/javascript" src="src/view/Layer.js"></script>
@@ -68,63 +55,72 @@
 		<script type="text/javascript">
 			(function () {
 				function main () {
+					var world = new huus.DataBase();
 
-					var world = new model.World();
+					world.getCollection('placables');
+					world.getCollection('forests');
+					world.getCollection('roads');
 
-					world.origins.set({
+					world.placables.insert({
+						type: 'origin',
 						name: 'origins#0',
 						label: 'Origin 0',
 						location: [0, 0]
 					});
 
-					world.totems.set({
+					world.placables.insert({
+						type: 'totem',
 						name: 'totem#0',
 						label: 'Totem 0',
 						location: [0, 10]
 					});
 
-					world.junctions.set({
+					world.placables.insert({
+						type: 'juntion',
 						name: 'juntions#0',
 						label: 'Junction 0',
 						location: [4, 4]
 					});
-					world.junctions.set({
+					world.placables.insert({
+						type: 'juntion',
 						name: 'juntions#1',
 						label: 'Junction 0',
 						location: [4, -4]
 					});
 
-					world.totems.set({
+					world.placables.insert({
+						type: 'totem',
 						name: 'totem#1',
 						label: 'Totem 0',
 						location: [10, 10]
 					});
 
-					world.forests.set({
+
+					world.forests.insert({
 						name: 'forest#1',
 						label: 'Forêt',
 						area: [-6, -6, -6, -5, -5, -6, -5, -5, -4, -5, -4, -4, -3, -4]
 					});
 
-					world.roads.set({
+					world.roads.insert({
 						name: 'road#0',
 						label: 'Road 0',
 						ends: ['juntions#0', 'juntions#1']
 					});
 
-					world.roads.set({
+					world.roads.insert({
 						name: 'road#1',
 						label: 'Road 1',
 						ends: ['juntions#0', 'origins#0']
 					});
 
-					world.roads.set({
+					world.roads.insert({
 						name: 'road#2',
 						label: 'Road 2',
 						ends: ['juntions#0', 'totem#1']
 					});
 
-					world.roads.set({
+					world.roads.insert({
 						name: 'road#3',
 						label: 'Road 3',
 						ends: ['juntions#0', 'totem#0']

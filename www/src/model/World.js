@@ -12,11 +12,11 @@ var RoadSet = window.model.RoadSet;
 var World = function () {
 	
 	this.origins_ = new OriginSet();
-	this.forests_ = new ForestSet();
 	this.totems_ = new TotemSet();
 	this.junctions_ = new JunctionSet();
-	this.roads_ = new RoadSet();
 
+	this.forests_ = new ForestSet();
+	this.roads_ = new RoadSet();
 	this.placables_ = new Union();
 
 	this.placables_.appendSet(this.origins_);
@@ -24,11 +24,13 @@ var World = function () {
 	this.placables_.appendSet(this.junctions_);
 };
 
+
 Object.defineProperty(World.prototype, 'placables', {
 	get: function () {
 		return this.placables_;
 	}
 });
+
 
 Object.defineProperty(World.prototype, 'origins', {
 	get: function () {

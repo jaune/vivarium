@@ -133,7 +133,6 @@ Viewer.prototype.render = function () {
 
 Viewer.prototype.resize = function (w, h) {
 	this.composite_.resize(w, h);
-	this.composite_.resize(w, h);
 	this.element_.setAttribute('style', 'width:'+w+'px; height:'+h+'px; position: absolute; top: 0; left: 0; margin: 0; padding: 0;');
 	this.render();
 };

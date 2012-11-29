@@ -10,14 +10,16 @@ var ResourceLayer = function (world) {
 ResourceLayer.prototype = Object.create(new Layer());
 
 ResourceLayer.prototype.doRender = function () {
-	this.world_.forests.each(function (item) {
-		item.area.each(function (location, key) {
-			this.drawDisk(
-				(10 * location.x),
-				(10 * location.y),
+	var me = this;
+
+	this.world_.forests.forEach(function (item) {
+		item.area.forEach(function (location, key) {
+			me.drawDisk(
+				(10 * location[0]),
+				(10 * location[1]),
 				10, '#74CB67');
-		}, this);
-	}, this);
+		});
+	});
 };
 
 return ResourceLayer;

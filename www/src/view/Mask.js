@@ -12,19 +12,23 @@ Mask.prototype = Object.create(new Layer());
 
 
 Mask.prototype.doRender = function () {
-	this.world_.origins.each(function (item) {
-		this.drawDisk(
-			(10 * item.location.x),
-			(10 * item.location.y),
-			100, '#fff');
-	}, this);
-
-	this.world_.totems.each(function (item) {
-		this.drawDisk(
-			(10 * item.location.x),
-			(10 * item.location.y),
-			60, '#fff');
-	}, this);
+	var me = this;
+	this.world_.placables.forEach(function (item) {
+		switch (item.type) {
+			case 'origin':
+				me.drawDisk(
+					(10 * item.location[0]),
+					(10 * item.location[1]),
+					100, '#fff');
+			break;
+			case 'totem':
+				me.drawDisk(
+					(10 * item.location[0]),
+					(10 * item.location[1]),
+					60, '#fff');
+			break;
+		}
+	});
 };
 
 return Mask;
